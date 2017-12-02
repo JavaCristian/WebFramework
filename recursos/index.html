@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>App</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	
+	<style type="text/css">
+		h1 {
+			color: #0A6410;
+			text-align: center;
+			transition-duration: .6s;
+		}
+
+		h1:hover {
+			color: #44E619;
+		}
+
+	</style>
+
+	<h1 id="titulo"></h1>
+	
+	<script type="text/javascript">
+
+		let titulo = document.getElementById("titulo");
+
+		function actualizar() {
+			titulo.innerHTML = new Date().toLocaleTimeString();
+		};
+
+		actualizar();
+
+		setInterval(actualizar, 1000);
+
+	</script>
+
+</body>
+</html>

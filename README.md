@@ -1,6 +1,6 @@
 # WebFramework
 
-Creado en 6 horas, inspirado en Spring Framework.
+Inspirado en Spring Framework.
 
 Es un 'miniframework' para proyectos web.
 

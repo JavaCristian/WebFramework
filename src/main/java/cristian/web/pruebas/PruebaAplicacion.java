@@ -4,8 +4,6 @@ import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import cristian.web.anotaciones.Controlador;
 import cristian.web.anotaciones.Peticion;
 import cristian.web.nucleo.Aplicacion;
@@ -24,11 +22,11 @@ public class PruebaAplicacion {
 	}
 	
 	@Peticion(ruta="/goku")
-	private Recurso goku(HttpServletRequest request) {
+	private Recurso goku() {
 		return Recurso.of("goku.png");
 	}
 	
-	@Peticion(ruta="/cr", rest=true)
+	@Peticion(ruta="/cr", rest=true, origenCruzado=true)
 	private Persona cristiano() {
 		return new Persona("Cristiano", "Ronaldo", 32);
 	}

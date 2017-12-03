@@ -44,9 +44,15 @@ class EjecutadorPeticion {
 	 */
 	protected void ejecutar(CazadorPeticiones cazador, String ruta, Request baseRequest, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		// Agregar cabezeras
+		if(peticion.rest())
+			response.setHeader("Content-Type", "application/json");
+		if(peticion.origenCruzado())
+			response.setHeader("Access-Control-Allow-Origin", "*");
 
 		Object[] parametros = obtenerParametros(ruta, request, response);
-
+		
 		if(esVoid) {
 			baseRequest.setHandled(true);
 			metodo.invoke(padreMetodoInstancia, parametros);

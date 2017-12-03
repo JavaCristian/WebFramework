@@ -23,5 +23,10 @@ public @interface Peticion {
 	 * @return - true si la consulta es de tipo REST
 	 */
 	boolean rest() default false;
+	
+	/**
+	 * @return - true si se permite el 'Access-Control-Allow-Origin'
+	 */
+	boolean origenCruzado() default false;
 
 }

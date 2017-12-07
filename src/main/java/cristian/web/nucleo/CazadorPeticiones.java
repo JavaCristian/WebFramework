@@ -2,6 +2,7 @@ package cristian.web.nucleo;
 
 import java.io.IOException;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +15,18 @@ import cristian.web.utiles.Reflex;
 
 class CazadorPeticiones extends ResourceHandler {
 	
+	protected MultipartConfigElement multipartConfigElement;
+	
 	protected CazadorPeticiones() {
 		setResourceBase("./recursos/");
 		setDirectoriesListed(false);
 		setDirAllowed(false);
+		
+		/*
+		 * Instancia para las peticiones multipart, pasando la ruta para 
+		 * archivos temporales del sistema operativo.
+		 */
+		multipartConfigElement = new MultipartConfigElement(System.getProperty("java.io.tmpdir"));
 	}
 	
 	@Override
@@ -37,7 +46,6 @@ class CazadorPeticiones extends ResourceHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	protected void recurso(Recurso recurso, Request request, HttpServletResponse response) throws Exception{

@@ -1,12 +1,18 @@
 package cristian.web.pruebas;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Locale;
 import java.util.UUID;
 
+import com.google.common.io.Files;
+
 import cristian.web.anotaciones.Controlador;
+import cristian.web.anotaciones.Parametro;
 import cristian.web.anotaciones.Peticion;
+import cristian.web.anotaciones.VariableRuta;
 import cristian.web.nucleo.Aplicacion;
+import cristian.web.nucleo.ArchivoMultipart;
 import cristian.web.nucleo.Recurso;
 
 @Controlador
@@ -40,6 +46,25 @@ public class PruebaAplicacion {
 	private void uuid(PrintWriter writer) {
 		writer.print(UUID.randomUUID().toString());
 		writer.close();
+	}
+	
+	@Peticion(ruta="/upload", metodos="POST")
+	private void test(PrintWriter writer, @Parametro(nombre="archivo") ArchivoMultipart archivo) {
+		try {
+			String ruta = System.getProperty("user.home") + "\\Desktop\\" + archivo.nombreArchivo();
+			Files.write(archivo.obtenerBytes(), new File(ruta));
+			writer.print("exito: true");
+		} catch (Exception e) {
+			writer.print("exito: false");
+		} finally {
+			writer.close();
+		}
+		
+	}
+	
+	@Peticion(ruta="/var/{nombre}")
+	private String rutaVariable(@VariableRuta(nombre="nombre") String nombre) {
+		return nombre;
 	}
 	
 }

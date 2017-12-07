@@ -13,19 +13,16 @@ import cristian.web.anotaciones.Peticion;
 import cristian.web.anotaciones.Controlador;
 
 class CargadorControladores {
-
+	
 	/**
-	 * Representa si el cargador ya ha sido iniciado.
+	 * Iniciar el cargador de controladores, buscando los @Controlador y 
+	 * las @Peticion para registrarlas.
 	 */
-	protected static boolean iniciado = false;
-
 	protected static void iniciar() throws Exception {
 
-		if(iniciado) {
+		if(Aplicacion.iniciado) {
 			throw new IllegalStateException("El cargador ya ha sido iniciado.");
 		}
-
-		iniciado = true;
 
 		/*
 		 * Objeto Reflections:

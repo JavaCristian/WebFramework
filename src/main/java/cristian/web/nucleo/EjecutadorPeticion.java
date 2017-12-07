@@ -140,8 +140,8 @@ class EjecutadorPeticion {
 			return null;
 		}
 		
-		// Si el parametro tiene la anotacion @VariableRuta
-		else if(param.isAnnotationPresent(VariableRuta.class)) {
+		// Si el parametro tiene la anotacion @VariableRuta y es String
+		else if(param.isAnnotationPresent(VariableRuta.class) && tipo.equals(String.class)) {
 			VariableRuta var = param.getDeclaredAnnotation(VariableRuta.class);
 			
 			if(var.nombre()!=null && !var.nombre().isEmpty())
@@ -170,7 +170,7 @@ class EjecutadorPeticion {
 	 * @param nombre - El nombre de la variable de ruta
 	 * @return - El valor de la variable si existe o null si no existe
 	 */
-	protected String obtenerRutaVariable(String ruta, String nombre) {
+	private String obtenerRutaVariable(String ruta, String nombre) {
 		
 		nombre = "{".concat(nombre).concat("}");
 		

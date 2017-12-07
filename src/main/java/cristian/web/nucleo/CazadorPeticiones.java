@@ -18,7 +18,7 @@ class CazadorPeticiones extends ResourceHandler {
 	protected MultipartConfigElement multipartConfigElement;
 	
 	protected CazadorPeticiones() {
-		setResourceBase("./recursos/");
+		setResourceBase("recursos/");
 		setDirectoriesListed(false);
 		setDirAllowed(false);
 		
@@ -34,7 +34,7 @@ class CazadorPeticiones extends ResourceHandler {
 			throws IOException, ServletException {
 		
 		// Obtener el ejecutador de peticiones
-		EjecutadorPeticion ejecutador = ManejadorPeticiones.obtenerEjecutador(ruta, request.getMethod());
+		EjecutadorPeticion ejecutador = ManejadorPeticiones.obtenerEjecutador(ruta.toLowerCase(), request.getMethod());
 		
 		try {
 			
@@ -68,7 +68,7 @@ class CazadorPeticiones extends ResourceHandler {
 	 * 
 	 * @param baseRequest - La peticion
 	 */
-	protected void validarMetodo(Request request) {
+	private void validarMetodo(Request request) {
 		MetaData.Request data = request.getMetaData();
 		
 		if(data!=null && !data.getMethod().equalsIgnoreCase("get") || !data.getMethod().equalsIgnoreCase("head")) {

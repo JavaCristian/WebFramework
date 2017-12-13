@@ -12,6 +12,9 @@ import org.reflections.util.ConfigurationBuilder;
 import cristian.web.anotaciones.Peticion;
 import cristian.web.anotaciones.Controlador;
 
+/**
+ * Esta clase se encarga de cargar todos los @Controladores y @Peticion
+ */
 class CargadorControladores {
 	
 	/**

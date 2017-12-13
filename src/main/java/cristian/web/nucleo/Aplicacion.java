@@ -2,6 +2,10 @@ package cristian.web.nucleo;
 
 import org.eclipse.jetty.server.Server;
 
+/**
+ * Esta clase representa el centro del 'MiniFramework' simplemente usando el metodo
+ * iniciar se iniciara la aplicacion, por defecto en el puerto 8080.
+ */
 public class Aplicacion {
 	
 	/**

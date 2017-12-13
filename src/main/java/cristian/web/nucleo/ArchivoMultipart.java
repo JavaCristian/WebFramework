@@ -4,6 +4,10 @@ import javax.servlet.http.Part;
 
 import org.eclipse.jetty.util.IO;
 
+/**
+ * Usar esta clase como parametro en metodos @Peticion para obtener el archivo
+ * que ha enviado el cliente al servidor.
+ */
 public class ArchivoMultipart {
 	
 	protected final Part part;

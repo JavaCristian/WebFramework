@@ -26,7 +26,7 @@ public class PruebaAplicacion {
 		return Recurso.of("index.html");
 	}
 	
-	@Peticion(ruta="/goku")
+	@Peticion(ruta="/goku", metodos={"GET", "POST"})
 	private Recurso goku() {
 		return Recurso.of("goku.png");
 	}

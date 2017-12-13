@@ -1,7 +1,14 @@
 package cristian.web.nucleo;
 
+/**
+ * Usar esta clase para metodos @Peticion en los que queremos devolver un recurso.
+ */
 public class Recurso {
 	
+	/**
+	 * @param nombre - El nombre del recurso
+	 * @return El recurso
+	 */
 	public static Recurso of(String nombre) {
 		return new Recurso(nombre);
 	}

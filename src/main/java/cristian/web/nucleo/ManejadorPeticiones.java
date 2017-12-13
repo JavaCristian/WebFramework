@@ -6,6 +6,10 @@ import java.util.HashMap;
 
 import cristian.web.anotaciones.Peticion;
 
+/**
+ * Esta clase maneja las peticiones almacenando los ejecutadores para que cuando se
+ * ejecute una @Peticion poder ejecutarla.
+ */
 class ManejadorPeticiones {
 
 	/**
@@ -118,7 +122,7 @@ class ManejadorPeticiones {
 	}
 
 	/**
-	 * @param parte - El segmento de la ruta
+	 * @param parte - La parte de la ruta
 	 * @return true si es un segmento
 	 */
 	private static boolean esSegmento(String parte) {
@@ -165,12 +169,9 @@ class ManejadorPeticiones {
 		int simActual = similitud(ruta, actual);
 		int simSiguiente = similitud(ruta, siguiente);
 
-		if(simActual == simSiguiente)
-			return siguiente;
-		else
-			return simActual>simSiguiente ? actual : siguiente;
+		return simActual>simSiguiente ? actual : siguiente;
 	}
-	
+
 	/**
 	 * @param ruta - La ruta de la peticion
 	 * @param ejecutador - El ejecutador

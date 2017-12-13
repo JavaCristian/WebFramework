@@ -11,8 +11,10 @@ import org.eclipse.jetty.http.MetaData;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 
-import cristian.web.utiles.Reflex;
-
+/**
+ * Esta clase es el cazador de peticiones para el servidor, solicitara un ejecutador al
+ * ManejadorAplicaciones para ejecutar la @Peticion.
+ */
 class CazadorPeticiones extends ResourceHandler {
 	
 	protected MultipartConfigElement multipartConfigElement;
@@ -48,11 +50,19 @@ class CazadorPeticiones extends ResourceHandler {
 		}
 	}
 	
+	/**
+	 * Usar este metodo para devolver un archivo.
+	 * 
+	 * @param recurso - El recurso
+	 * @param request - La peticion
+	 * @param response - La respuesta
+	 * @throws Exception - Si ejecutando la superclase hay algun error.
+	 */
 	protected void recurso(Recurso recurso, Request request, HttpServletResponse response) throws Exception{
 		/*
 		 * Modificar la ruta del request para que el cazador de recursos encuentre la peticion
 		 */
-		Reflex.setValue(request, "_pathInfo", recurso.ruta());
+		request.setPathInfo(recurso.ruta());
 		
 		// Validar metodo
 		validarMetodo(request);
@@ -71,8 +81,8 @@ class CazadorPeticiones extends ResourceHandler {
 	private void validarMetodo(Request request) {
 		MetaData.Request data = request.getMetaData();
 		
-		if(data!=null && !data.getMethod().equalsIgnoreCase("get") || !data.getMethod().equalsIgnoreCase("head")) {
-			Reflex.setValue(data, "_method", "GET");
+		if(data!=null && !data.getMethod().equalsIgnoreCase("GET") || !data.getMethod().equalsIgnoreCase("HEAD")) {
+			request.setMethod("GET");
 		}
 	}
 	

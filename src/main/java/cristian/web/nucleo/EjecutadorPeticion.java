@@ -18,6 +18,9 @@ import cristian.web.anotaciones.Parametro;
 import cristian.web.anotaciones.Peticion;
 import cristian.web.anotaciones.VariableRuta;
 
+/**
+ * Esta clase se encarga de ejecutar las @Peticion que el desarrollador haya creado.
+ */
 class EjecutadorPeticion {
 	
 	protected static final Gson gson = new GsonBuilder().setPrettyPrinting().create();

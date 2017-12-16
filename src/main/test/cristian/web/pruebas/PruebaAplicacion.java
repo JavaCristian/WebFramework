@@ -1,10 +1,16 @@
 package cristian.web.pruebas;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.util.Locale;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.eclipse.jetty.util.IO;
 
 import cristian.web.anotaciones.Controlador;
 import cristian.web.anotaciones.Parametro;
@@ -48,7 +54,7 @@ public class PruebaAplicacion {
 	}
 	
 	@Peticion(ruta="/upload", metodos="POST")
-	private void test(PrintWriter writer, @Parametro(nombre="archivo") ArchivoMultipart archivo) {
+	private void upload(PrintWriter writer, @Parametro(nombre="archivo") ArchivoMultipart archivo) {
 		try {
 			String ruta = System.getProperty("user.home") + "\\Desktop\\" + archivo.nombreArchivo();
 			Files.write(new File(ruta).toPath(), archivo.obtenerBytes());
@@ -59,6 +65,26 @@ public class PruebaAplicacion {
 			writer.close();
 		}
 		
+	}
+	
+	@Peticion(ruta="/download")
+	private void download(HttpServletResponse response, @Parametro(nombre="nombre") String nombre) {
+		try {
+			String ruta = System.getProperty("user.home") + "\\Desktop\\" + nombre;
+			File file = new File(ruta);
+			if(file.exists()) {
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+				InputStream input = new FileInputStream(file);
+				IO.copy(input, response.getOutputStream());
+				input.close();
+			} else {
+				PrintWriter writer = response.getWriter();
+				writer.printf("El archivo %s no existe!", nombre);
+				writer.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Peticion(ruta="/var/{nombre}")

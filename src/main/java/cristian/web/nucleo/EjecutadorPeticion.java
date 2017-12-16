@@ -38,8 +38,8 @@ class EjecutadorPeticion {
 		padreMetodoInstancia = metodo.getDeclaringClass().newInstance();
 
 		// Comprobar si el metodo es void
-		this.esVoid = metodo.getReturnType().equals(Void.class);
-
+		this.esVoid = metodo.getReturnType().getName().equals("void");
+		
 		// Comprobar si el metodo es accesible
 		if(!metodo.isAccessible()) {
 			metodo.setAccessible(true);
@@ -67,7 +67,7 @@ class EjecutadorPeticion {
 			response.setHeader("Access-Control-Allow-Origin", "*");
 
 		Object[] parametros = obtenerParametros(ruta, request, response);
-
+		
 		if(esVoid) {
 			baseRequest.setHandled(true);
 			metodo.invoke(padreMetodoInstancia, parametros);
